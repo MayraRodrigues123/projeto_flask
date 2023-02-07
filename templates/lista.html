@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<div class="galeria" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    {% for foto in fotos %}
+        <div class="card text-center" style="width: 18rem;">
+                <img src="/uploads/foto{{foto.id}}.jpg" class="card-img-top" alt="..." width="250px" height="300px">
+                <div class="card-body">
+                    <h5 class="card-title">{{foto.nome}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{foto.autor}}</h6>
+                </div>
+                <div class="card-footer text-muted">
+                    {% if session['usuario_logado'] %}
+                        <a href="{{ url_for('visualizar', id=foto.id) }}" class="btn btn-success">Visualizar</a>
+                        <a href="{{ url_for('editar', id=foto.id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ url_for('deletar', id=foto.id) }}" class="btn btn-danger">Deletar</a>
+                    {% endif %}
+
+                </div>
+            </div>
+                    {% endfor %}
+
+</div>
+
+{% endblock %}
